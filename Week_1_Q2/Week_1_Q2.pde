@@ -2,10 +2,20 @@ float i,j;
 
 void setup(){
 size(600,600);
+noStroke();
 }
 
 void draw(){
-  i=map(mouseX,0,600,0,255);
-  j=map(mouseY,0,600,0,255);
-background(i,j,255);
+  for(int i =0;i<width;i++){
+    for(int j =0;j<width;j++){
+      float distX=dist(i,0,mouseX,0);
+      float distY=dist(0,j,0,mouseY);
+      
+      float r=map(distX,0,width,0,255);
+      float g=map(distY,0,height,0,255);
+      
+      fill(r,g,175);
+    rect(i,j,10,10);
+    }
+  }
 }

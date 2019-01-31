@@ -1,40 +1,33 @@
-float c1, c2, c3, c4;
+String myStrings[]={"hi", "hello", "hey", "how's it going"};
+float xPos[]=new float[4];
 
-void setup(){
-size(600,600);
-textSize(20);
-textAlign(CENTER);
+int size=100;
+
+void setup() {
+  size(600,600);
+
+  float spacing = width/size;
+
+  for (int i =0; i<4; i++) {
+    xPos[i] = i* spacing + size*.75;
+  }
 }
 
-void draw(){
-background(255);
-c1=dist(80,100,mouseX,mouseY);
-c2=dist(230,100,mouseX,mouseY);
-c3=dist(380,100,mouseX,mouseY);
-c4=dist(530,100,mouseX,mouseY);
-fill(0);
-ellipse(80,100,100,100);
-ellipse(230,100,100,100);
-ellipse(380,100,100,100);
-ellipse(530,100,100,100);
-if(mousePressed && c1<= 50){
-  text("Hello", 300,400);
-fill(255);
-ellipse(80,100,100,100);
-}
-if(mousePressed && c2<= 50){
-  text("Hi there", 300,400);
-fill(255);
-ellipse(230,100,100,100);
-}
-if(mousePressed && c3<= 50){
-  text("How's it going", 300,400);
-fill(255);
-ellipse(380,100,100,100);
-}
-if(mousePressed && c4<= 50){
-  text("Greetings", 300,400);
-fill(255);
-ellipse(530,100,100,100);
-}
+void draw() {
+  background(255);
+  int index=0;
+
+  for (int i=0; i<4; i++) {
+    ellipse(xPos[i], 100, size, size);
+
+    if (dist(mouseX, mouseY, xPos[i], 100)<=size&&mousePressed) {
+      index=i;
+      println(i);
+      fill(255);
+    } else {
+      fill(0);
+    }
+  }
+  fill(0);
+  text(myStrings[index], width/2-textWidth(myStrings[index]), height/2);
 }
