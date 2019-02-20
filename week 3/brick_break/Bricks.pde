@@ -1,9 +1,11 @@
 class Bricks{
+  boolean detector;
   float w, h; 
   float x, y; 
   int o = 255; 
   
   Bricks(float x, float y, int w, int h){
+    detector=true;
     this.x = x; 
     this.y = y; 
     

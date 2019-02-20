@@ -17,11 +17,12 @@ class Ball{
   
   void bounceTop(){
      vel.y = -vel.y; 
-
+     
   }
   
   void paddleBounce(){
      vel = vel.mult(-1); 
+     vel.x = -vel.x; 
   }
   
   void move(){

@@ -4,6 +4,8 @@ int h = 25;
 
 int sc, ti, lf,at;
 
+boolean zo, de;
+
 Ball b; 
 Paddle p; 
 Bricks myBricks [][]; //setting up a 2D grid to store instances of our bricks
@@ -26,6 +28,9 @@ void setup(){
     ti=60;
     at=60;
     lf=3;
+    
+    zo=false;
+    de=false;
   
   for(int i = 0; i<cols; i++){
     for(int j = 0; j<rows; j++){
@@ -52,10 +57,15 @@ void draw(){
   text("Lives: " + lf,600, 460);
   
   //countdown
+  if(zo==false){
   ti=ti-1;
+  }
   if(ti==0){
     ti=60;
   at=at-1;
+  }
+  if(at==0){
+  zo=true;
   }
   
   //stop ball
@@ -79,8 +89,11 @@ void draw(){
     b.bounceTop(); 
   }
   
-  if(b.pos.y>= height-b.size/2){
-    lf=lf-1;; 
+  if(b.pos.y>= height-b.size/2 && de==false){
+    lf=lf-1; 
+  }
+  if(lf==0){
+  de=true;
   }
   
   //ball bouncing off of the paddle 
@@ -98,9 +111,11 @@ void draw(){
       
             // checking to see if ball is within the boundaries of our bricks 
       if(b.pos.x<= (myBricks[i][j].x + myBricks[i][j].w/2) && b.pos.x>= (myBricks[i][j].x - myBricks[i][j].w/2) 
-        && b.pos.y<= (myBricks[i][j].y + myBricks[i][j].h/2) && b.pos.y>= (myBricks[i][j].y - myBricks[i][j].h/2)){
+        && b.pos.y<= (myBricks[i][j].y + myBricks[i][j].h/2) && b.pos.y>= (myBricks[i][j].y - myBricks[i][j].h/2)&& myBricks[i][j].detector==true){
          myBricks[i][j].o = 0;  //just changing the opacity here but you can figure out how to remove the object using an array list 
          sc=sc+100;
+         myBricks[i][j].detector=false;
+         b.paddleBounce(); 
       }
     }
   }
