@@ -2,7 +2,9 @@ int cols, rows;
 int w = 50;
 int h = 25; 
 
-int sc, ti, lf,at;
+int  ti, lf,at,score;
+
+String [] sc;
 
 boolean zo, de;
 
@@ -19,6 +21,7 @@ void setup(){
   
   textSize(20);
   
+  sc = loadStrings("lines.csv"); 
 
   myBricks = new Bricks[cols][rows]; 
   
@@ -46,7 +49,7 @@ void draw(){
   
   //Score
   textAlign(RIGHT, TOP);
-  text("Score: " + sc,150, 460);
+  text("Score: " + score,150, 460);
   
   //Timer
   textAlign(CENTER, TOP);
@@ -72,6 +75,12 @@ void draw(){
   if(at==0||lf==0){
   b.vel.x=0;
   b.vel.y=0;
+  
+  sc= append(sc, str(score));
+  
+  saveStrings("lines.csv", sc); 
+  
+  exit();
   }
   
   
@@ -113,7 +122,7 @@ void draw(){
       if(b.pos.x<= (myBricks[i][j].x + myBricks[i][j].w/2) && b.pos.x>= (myBricks[i][j].x - myBricks[i][j].w/2) 
         && b.pos.y<= (myBricks[i][j].y + myBricks[i][j].h/2) && b.pos.y>= (myBricks[i][j].y - myBricks[i][j].h/2)&& myBricks[i][j].detector==true){
          myBricks[i][j].o = 0;  //just changing the opacity here but you can figure out how to remove the object using an array list 
-         sc=sc+100;
+         score=score+100;
          myBricks[i][j].detector=false;
          b.paddleBounce(); 
       }
